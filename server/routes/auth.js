@@ -6,34 +6,6 @@ const verifyJwt = require("express-jwt");
 
 router.post("/register", register, token.issue);
 
-router.get(
-  "/route-we-want-to-protect",
-  verifyJwt({ secret: process.env.JWT_SECRET }),
-  routeWeWantToProtect
-);
-
-function routeWeWantToProtect(req, res) {
-  //...
-}
-
-router.get("/user", verifyJwt({ secret: process.env.JWT_SECRET }), user);
-
-function user(req, res) {
-  db.getUser(req.user.id)
-    .then(({ username }) =>
-      res.json({
-        ok: true,
-        username
-      })
-    )
-    .catch(() =>
-      res.status(500).json({
-        ok: false,
-        message: "An error ocurred while retrieving your user profile."
-      })
-    );
-}
-
 function register(req, res, next) {
   console.log(req.body);
   const { username, password } = req.body;
@@ -57,6 +29,24 @@ function register(req, res, next) {
         message: "Something bad happened. We don't know why."
       });
     });
+}
+
+router.get("/user", verifyJwt({ secret: process.env.JWT_SECRET }), user);
+
+function user(req, res) {
+  db.getUser(req.user.id)
+    .then(({ username }) =>
+      res.json({
+        ok: true,
+        username
+      })
+    )
+    .catch(() =>
+      res.status(500).json({
+        ok: false,
+        message: "An error ocurred while retrieving your user profile."
+      })
+    );
 }
 
 module.exports = router;
