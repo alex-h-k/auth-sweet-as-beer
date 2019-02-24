@@ -36,6 +36,7 @@
     "webpack": "^3.11.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "knex": "^0.16.3",
     "sqlite3": "^4.0.6"

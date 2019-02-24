@@ -5,7 +5,7 @@ const server = express();
 const authRoutes = require("./routes/auth");
 
 server.use(bodyParser.json());
-// server.use(express.json()); why have to change to bodyParser?
+server.use(express.json());
 server.use(express.static(path.join(__dirname, "../public")));
 server.use("/api/v1/auth", authRoutes);
 
