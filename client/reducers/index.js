@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 
 import currentPage from './current-page'
 import beers from './beers'
@@ -9,4 +9,3 @@ export default combineReducers({
   beers,
   cart
 })
-
