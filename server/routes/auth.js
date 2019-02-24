@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const createUser = require("../db/users");
+const db = require("../db/users");
 
 router.post("/register", register);
 
 function register(req, res) {
+  console.log(req.body);
   const { username, password } = req.body;
-  createUser({ username, password })
+  db.createUser({ username, password })
     .then(() => res.status(201).json({ ok: true }))
     //TODO: make sure username doesn't already exist
     //TODO: if not, hash the password and add the user to the database
