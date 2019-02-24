@@ -1,9 +1,12 @@
-const path = require('path')
-const express = require('express')
+const path = require("path");
+const express = require("express");
+const bodyParser = require("body-parser");
+const server = express();
+const authRoutes = require("./routes/auth");
 
-const server = express()
+server.use(bodyParser.json());
+// server.use(express.json()); why have to change to bodyParser?
+server.use(express.static(path.join(__dirname, "../public")));
+server.use("/api/v1/auth", authRoutes);
 
-server.use(express.json())
-server.use(express.static(path.join(__dirname, '../public')))
-
-module.exports = server
+module.exports = server;
